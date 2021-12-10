@@ -1,6 +1,6 @@
 import { getIndentation } from './Object.utils';
 
-const PropertyComponent = ({ name, value, depth }) => {
+const Property = ({ name, value, depth }) => {
 
 	const isBoolean = typeof value === 'boolean';
 
@@ -12,4 +12,4 @@ const PropertyComponent = ({ name, value, depth }) => {
 };
 
 
-export default PropertyComponent;
+export default Property;
