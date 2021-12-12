@@ -1,14 +1,14 @@
 import Property from './Property';
 import { useEffect, useState } from 'react';
 import { getIndentation } from './Object.utils';
-
+import styles from './Object.css';
 
 const ObjectComponent = ({ name, object }) => {
 	const [isExpandAll, setIsExpandALl] = useState(false);
 
 	return <>
-		<h1 style={{ 'display': 'inline' }} onClick={() => setIsExpandALl(true)}> Expand</h1>
-		<h1 style={{ 'display': 'inline' }} onClick={() => setIsExpandALl(false)}> Collapse </h1>
+		<h1 className="object-label" onClick={() => setIsExpandALl(true)}> Expand</h1>
+		<h1 className="object-label" onClick={() => setIsExpandALl(false)}> Collapse </h1>
 		<ObjectActual key={name + 'object'} name={name} object={object} currentDepth={0}
 					  shouldExpand={isExpandAll}/>
 	</>;
@@ -26,22 +26,21 @@ const ObjectActual = ({ name, object, currentDepth, shouldExpand = false }) => {
 	const ObjectDetails = () => {
 		return (
 			<div style={getIndentation(currentDepth)}>
-				<h1 style={{ 'display': 'inline' }} onClick={() => setIsExpand(!isExpand)}> {isExpand ? 'v' : '>'} </h1>
-				<h1 style={{ 'display': 'inline' }}> {name || 'object'} {`${brackets.open}${entries.length || 0}${brackets.close}`}</h1>
+				<h1 className="object-label" onClick={() => setIsExpand(!isExpand)}> {isExpand ? 'v' : '>'} </h1>
+				<h1 className="object-label"> {name || 'object'} {`${brackets.open}${entries.length || 0}${brackets.close}`}</h1>
 			</div> );
 	};
 
 	const ObjectChildren = () => {
 		return ( <>
 			{isExpand && ( entries.length > 0 ? entries.map(entry => <Entry entry={entry}/>)
-				: <Property value={'(empty object)'} depth={currentDepth + 1}/> )}
+				: <Property name={name} value={'(empty object)'} depth={currentDepth + 1}/> )}
 		</> );
 	};
 
-	const Entry = ({ entry }) => {
+	const Entry = ({ entry, }) => {
 		const [key, value] = entry;
-		return <ObjectActual name={key} object={value} currentDepth={currentDepth + 1}
-							 shouldExpand={shouldExpand}/>;
+		return <ObjectActual name={key} object={value} currentDepth={currentDepth + 1} shouldExpand={shouldExpand}/>;
 	};
 
 	return (
