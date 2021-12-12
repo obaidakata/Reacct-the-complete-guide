@@ -18,7 +18,7 @@
 /*    transform: translateY(0);*/
 /*}*/
 
-/*.ModalOClosed {*/
+/*.ModalClosed {*/
 /*    opacity: 0;*/
 /*    transform: translateY(-100%);*/
 /*}*/
@@ -60,8 +60,8 @@
 }
 
 
-.ModalOClosed {
-    animation: closeModel 0.4s ease-out forwards;
+.ModalClosed {
+    animation: closeModel 1s ease-out forwards;
 }
 
 @keyframes closeModel {
